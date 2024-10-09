@@ -1,0 +1,7 @@
+{
+  "name": "listaprecios-APP",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
