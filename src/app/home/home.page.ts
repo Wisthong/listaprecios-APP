@@ -13,10 +13,18 @@ import {
   IonRow,
   IonCol,
   IonInput,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonText,
+  IonIcon,
+  IonSearchbar,
 } from '@ionic/angular/standalone';
 import { PreciosService } from '../services/precios.service';
 import { Result } from '../model/precio';
-import { JsonPipe } from '@angular/common';
+import { DecimalPipe, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +32,9 @@ import { JsonPipe } from '@angular/common';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
+    IonSearchbar,
+    IonIcon,
+    IonText,
     IonInput,
     IonLabel,
     IonList,
@@ -38,14 +49,26 @@ import { JsonPipe } from '@angular/common';
     IonCol,
     FormsModule,
     JsonPipe,
+    DecimalPipe,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
   ],
 })
 export class HomePage {
   private timeout: any;
-  public inputValue: number = 0;
+  public inputValue: any;
   public objectResult!: Result;
+  public anio: number = 0;
 
   private readonly preciosSvc = inject(PreciosService);
+
+  ngOnInit(): void {
+    const date = new Date();
+    this.anio = date.getUTCFullYear();
+  }
 
   onInputChange(event: any) {
     // Reiniciar el timeout si el usuario sigue escribiendo
