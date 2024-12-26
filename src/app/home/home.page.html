@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
     <img
       class="mx-auto"
@@ -13,12 +13,9 @@
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <!-- <img src="../../assets/img/logo.png" alt="" srcset=""> -->
-      </ion-col>
       <!-- <ion-col>2</ion-col> -->
-      <ion-col size="auto">
-        <ion-item>
+      <ion-col size="">
+        <div class="ion-text-center">
           <ion-searchbar
             show-cancel-button="never"
             placeholder="Código de barras"
@@ -26,29 +23,21 @@
             [(ngModel)]="inputValue"
             (ionInput)="onInputChange($event)"
           ></ion-searchbar>
-          <!-- <ion-label position="floating">Escribe algo</ion-label>
-          <ion-input
-            type="number"
-            [(ngModel)]="inputValue"
-            (ionInput)="onInputChange($event)"
-          ></ion-input> -->
-        </ion-item>
+        </div>
       </ion-col>
-      <ion-col>4</ion-col>
-      <!-- <ion-col>5</ion-col>
-      <ion-col>6</ion-col> -->
     </ion-row>
   </ion-grid>
 
-  <ion-card class=" ">
-    <img alt="Silhouette of mountains" src="../../assets/img/universal.jpg" />
+  <ion-card class="">
+    <!-- <ion-img alt="Imagen de referencia" src="https://picsum.photos/100/85"> -->
+
     <ion-card-header class="font-extrabold text-xl font-roboto">
       <p>
         <ion-text class="bg-amarillo_universal rounded-md px-2 text-white w-16">
           Descripción:
         </ion-text>
         @if (objectResult) {
-        <ion-text class="text-azul_universal uppercase mx-2">
+        <ion-text class="text-azul_universal uppercase mx-2 text-justify">
           {{objectResult.DESCRIPCION}}
         </ion-text>
 
@@ -67,7 +56,7 @@
         <ion-text
           class="text-azul_universal mx-2 font-extrabold text-xl font-roboto"
         >
-          {{objectResult.ID_ITEM | number}}
+          {{objectResult.ID_ITEM }}
         </ion-text>
         }
       </p>
@@ -81,7 +70,7 @@
         <ion-text
           class="text-azul_universal mx-2 font-extrabold text-xl font-roboto"
         >
-          {{ objectResult.PRECIO_MIN_1| number}}
+          {{ objectResult.PRECIO_MIN_1| currency: 'COP' }}
         </ion-text>
         }
       </p>
@@ -89,8 +78,8 @@
   </ion-card>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar color="dark">
+<ion-footer class="ion-no-border" [translucent]="true">
+  <ion-toolbar>
     <ion-grid>
       <ion-row>
         <ion-col>
