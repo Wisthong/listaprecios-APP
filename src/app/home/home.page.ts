@@ -1,30 +1,24 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonContent,
-  IonList,
-  IonItem,
-  IonLabel,
   IonFooter,
   IonGrid,
   IonRow,
   IonCol,
-  IonInput,
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonText,
-  IonIcon,
   IonSearchbar,
 } from '@ionic/angular/standalone';
 import { PreciosService } from '../services/precios.service';
 import { Result } from '../model/precio';
-import { DecimalPipe, JsonPipe } from '@angular/common';
+import { CurrencyPipe, DecimalPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -33,37 +27,34 @@ import { DecimalPipe, JsonPipe } from '@angular/common';
   standalone: true,
   imports: [
     IonSearchbar,
-    IonIcon,
     IonText,
-    IonInput,
-    IonLabel,
-    IonList,
     IonHeader,
     IonToolbar,
-    IonTitle,
     IonContent,
-    IonItem,
     IonFooter,
     IonGrid,
     IonRow,
     IonCol,
     FormsModule,
-    JsonPipe,
     DecimalPipe,
     IonCard,
     IonCardContent,
     IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
+    CurrencyPipe,
   ],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   private timeout: any;
   public inputValue: any;
   public objectResult!: Result;
   public anio: number = 0;
+  httpError = {
+    mensaje: '',
+    url: '',
+  };
 
   private readonly preciosSvc = inject(PreciosService);
+  private readonly toastrSvc = inject(ToastrService);
 
   ngOnInit(): void {
     const date = new Date();
@@ -83,9 +74,32 @@ export class HomePage {
       (resOk) => {
         this.objectResult = resOk;
         console.log(resOk);
+        setTimeout(() => {
+          this.objectResult = {
+            DESCRIPCION: '',
+            ID_ITEM: '',
+            ID_LIPRE1: '',
+            PRECIO_MIN_1: 0,
+          };
+        }, 10 * 1000);
       },
-      (resFail) => {
-        alert('Item no catalogado, por favor dirigite con l@s asesores');
+      (resFail: HttpErrorResponse) => {
+        this.objectResult = {
+          DESCRIPCION: '',
+          ID_ITEM: '',
+          ID_LIPRE1: '',
+          PRECIO_MIN_1: 0,
+        };
+
+        this.toastrSvc.error(
+          'Item no catalogado, por favor dirigite con l@s asesores',
+          'Error'
+        );
+        // alert('');
+        this.httpError = {
+          mensaje: resFail.message,
+          url: resFail.url!,
+        };
         console.log(resFail);
       }
     );
