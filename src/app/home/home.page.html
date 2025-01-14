@@ -10,10 +10,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
   <ion-grid>
     <ion-row>
-      <!-- <ion-col>2</ion-col> -->
       <ion-col size="">
         <div class="ion-text-center">
           <ion-searchbar
@@ -27,10 +26,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <ion-card class="">
-    <!-- <ion-img alt="Imagen de referencia" src="https://picsum.photos/100/85"> -->
-
+  <!-- class="ion-padding" -->
+  <ion-card >
     <ion-card-header class="font-extrabold text-xl font-roboto">
       <p>
         <ion-text class="bg-amarillo_universal rounded-md px-2 text-white w-16">
@@ -40,7 +37,6 @@
         <ion-text class="text-azul_universal uppercase mx-2 text-justify">
           {{objectResult.DESCRIPCION}}
         </ion-text>
-
         }
       </p>
     </ion-card-header>
@@ -78,20 +74,20 @@
   </ion-card>
 </ion-content>
 
-<ion-footer class="ion-no-border" [translucent]="true">
+<ion-footer class="" [translucent]="true">
   <ion-toolbar>
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-text>
-            <p class="text-xs">
+            <p class="text-xs font-bold">
               © {{anio | number }} Desarrollador: Wisthong Martinez
             </p>
           </ion-text>
         </ion-col>
         <ion-col>
           <ion-text>
-            <p class="text-xs">© {{anio | number }} Diseño: Luis Rojas</p>
+            <p class="text-xs font-bold">© {{anio | number }} Diseño: Luis Rojas</p>
           </ion-text>
         </ion-col>
       </ion-row>

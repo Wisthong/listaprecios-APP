@@ -12,8 +12,7 @@ import {
   IonCardContent,
   IonCardHeader,
   IonText,
-  IonSearchbar,
-} from '@ionic/angular/standalone';
+  IonSearchbar, IonTitle } from '@ionic/angular/standalone';
 import { PreciosService } from '../services/precios.service';
 import { Result } from '../model/precio';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
@@ -25,7 +24,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonTitle, 
     IonSearchbar,
     IonText,
     IonHeader,
@@ -66,7 +65,7 @@ export class HomePage implements OnInit {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       this.showValue();
-    }, 3000);
+    }, 1 * 1000);
   }
 
   showValue() {
